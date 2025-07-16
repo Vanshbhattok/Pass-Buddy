@@ -7,7 +7,13 @@ const cors = require('cors');
 dotenv.config(); // Load .env variables
 
 const url = process.env.MONGO_URI;
-const client = new MongoClient(url);
+const client = new MongoClient(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  tls: true,
+  tlsAllowInvalidCertificates: true
+});
+
 const dbName = 'PassBuddy';
 
 const app = express();
