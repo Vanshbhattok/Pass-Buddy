@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import { v4 as uuidv4 } from 'uuid';
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 
 const Manager = () => {
   const[form, setform] = useState({site: "", username: "", password: ""});
   const [passwordArray, setPasswordArray] = useState([])
   
   const getPasswords = async () =>{
-    let req = await fetch("http://localhost:3000/")
+let req = await fetch(`${backendUrl}/`)
     let passwords = await req.json()
     console.log(passwords)
     setPasswordArray(passwords)
@@ -38,12 +40,12 @@ theme: "dark",
   const savePassword= async() => {
     if(form.site.length > 5 && form.username.length > 4 && form.password.length > 4){
     
-    await fetch("http://localhost:3000/", {method: "DELETE", headers: {"Content-type": "application/json"},
+    await fetch(`${backendUrl}/`, {method: "DELETE", headers: {"Content-type": "application/json"},
     body: JSON.stringify({id: form.id})})
 
     console.log(form)
     setPasswordArray([...passwordArray, {...form, id: uuidv4()}])
-    await fetch("http://localhost:3000/", {method: "POST", headers: {"Content-type": "application/json"},
+    await fetch(`${backendUrl}/`, {method: "POST", headers: {"Content-type": "application/json"},
     body: JSON.stringify({ ...form, id: uuidv4( )})})
     //localStorage.setItem("passwords", JSON.stringify([...passwordArray, {...form, id: uuidv4()}]))
     //console.log([...passwordArray, form])
@@ -79,7 +81,7 @@ theme: "dark",
     let conf = confirm("Really want to delete this password!!!")
     if(conf){
     setPasswordArray(passwordArray.filter(item=>item.id!==id))
-    let res = await fetch("http://localhost:3000/", {method: "DELETE", headers: {"Content-type": "application/json"},
+    let res = await fetch(`${backendUrl}/`, {method: "DELETE", headers: {"Content-type": "application/json"},
     body: JSON.stringify({id})})
     //localStorage.setItem("passwords", JSON.stringify(passwordArray.filter(item=>item.id!==id)))
     //console.log([...passwordArray, form])
