@@ -4,7 +4,7 @@
 ![Status](https://img.shields.io/badge/Deployed-Fully%20Working-brightgreen?style=for-the-badge)  
 A secure, sleek, and smart password manager built with **React**, **Express**, and **MongoDB Atlas**.
 
-🌐 **Live Deployment**: [Vercel Deployment]((https://pass-buddy-1yum.vercel.app/))  
+🌐 **Live Deployment**: https://pass-buddy-1yum.vercel.app/ 
 
 ## ✨ Features
 
